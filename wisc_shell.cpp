@@ -6,7 +6,7 @@
 
 int main(){
 	bool RUN = true;
-	std::string prompt = "prompt>";
+	std::string prompt = "prompt> ";
 	while (RUN){
 		std::cout << prompt;
 		std::string line;
@@ -47,3 +47,13 @@ int main(){
 		}
 	}
 }
+
+/*
+Commands supported:
+ls
+pwd
+mkdir
+rm
+rmdir
+quit
+*/
