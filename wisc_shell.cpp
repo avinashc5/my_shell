@@ -66,6 +66,7 @@ pwd
 mkdir
 rm
 rmdir
-quit
+grep
 echo
+quit
 */
