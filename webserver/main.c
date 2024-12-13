@@ -10,8 +10,7 @@ pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 
 // an example wrapper -- see if you can write your own 
 // for the other functions (lock, unlock, join)!
-void
-Pthread_create(pthread_t  *thread, pthread_attr_t *attr, void * (*start_routine)(void *), void * arg)
+void Pthread_create(pthread_t  *thread, pthread_attr_t *attr, void * (*start_routine)(void *), void * arg)
 {
     int rc = pthread_create(thread, attr, start_routine, arg);
     if (rc != 0) {
@@ -24,8 +23,7 @@ Pthread_create(pthread_t  *thread, pthread_attr_t *attr, void * (*start_routine)
 // it takes a void ptr as an arg, and returns a void ptr
 // you can use these void ptrs to pass arbitrary info
 // in and out of the threads
-void *
-myfunc(void *ptr)
+void* myfunc(void *ptr)
 {
     // passed a pointer to an integer in, so unpack it
     int *p = (int *) ptr;
@@ -42,8 +40,7 @@ myfunc(void *ptr)
 
 // the main routine just starts a bunch of threads and then
 // waits for them to finish
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     pthread_t thread[numThreads];
     int x = 0;

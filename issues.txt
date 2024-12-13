@@ -1,0 +1,6 @@
+Fixed:
+There was a problem in execvp() command. It was not working. I don't know what was wrong. Earlier I was making an array of char* from the vector of char* for the second argument to execvp(). But this was not working. No output to stdout. Even stderr didn't work. But then I changed this. I used the vector.data() function instead of making and array of char*. Then there was no problem and the output of the commands was then printed to stdout. I don't know what changed
+
+
+To be done:
+There is a problem with the implementation of the shell. When multiple commands have been given as prompt, then all these commands should be executed in parallel. But the way I have implemented it, they executed in series. Try "./cpu A ; ./cpu B ; ./cpu C ; ./cpu D".
