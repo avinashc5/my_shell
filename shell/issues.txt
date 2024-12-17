@@ -1,6 +1,10 @@
 Fixed:
-There was a problem in execvp() command. It was not working. I don't know what was wrong. Earlier I was making an array of char* from the vector of char* for the second argument to execvp(). But this was not working. No output to stdout. Even stderr didn't work. But then I changed this. I used the vector.data() function instead of making and array of char*. Then there was no problem and the output of the commands was then printed to stdout. I don't know what changed
+There was a problem in execvp() command. It was not working. I don't know what was wrong. Earlier I was making an array of char* from the vector of char* for the second argument to execvp(). But this was not working. No output to stdout. Even stderr didn't work. But then I changed this. I used the vector.data() function instead of making an array of char*. Then there was no problem and the output of the commands was then printed to stdout. I don't know what changed
+
+
+There was a problem with the implementation of the shell. When multiple commands have been given as prompt, then all these commands should be executed in parallel. But the way I had implemented it, they executed in series. Try "./cpu A ; ./cpu B ; ./cpu C ; ./cpu D".
+Fixed it by doing nothing in the parent process, in the for loop, of creating the child processes. So I remove the wait from there and added a wait at the end of the while loop for each child process in the parent process. How did I take care that only the parent process will access this wait loop? Because once the child processes were done executing their task, I killed them (You can see an exit statement in the child process block). This one line is important for or else the child process can go on creating its own children (which are unnecessary).
 
 
 To be done:
-There is a problem with the implementation of the shell. When multiple commands have been given as prompt, then all these commands should be executed in parallel. But the way I have implemented it, they executed in series. Try "./cpu A ; ./cpu B ; ./cpu C ; ./cpu D".
+

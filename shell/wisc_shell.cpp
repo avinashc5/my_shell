@@ -38,13 +38,9 @@ int main(){
 
 		for (int i = 0; i < command_args.size(); i++){
 			pid_t c_pid = fork();
-			if (c_pid == -1){
+			if (c_pid == -1){ // Fork did not work properly
 				perror("fork");
 				exit(EXIT_FAILURE);
-			}
-			else if (c_pid > 0){ // Parent process
-				int status;
-				waitpid(c_pid, &status, 0);
 			}
 			else if (c_pid == 0){ // Child process
 				int status_code = execvp(command_args[i][0], command_args[i].data());
@@ -56,6 +52,14 @@ int main(){
 				exit(EXIT_SUCCESS);
 			}
 		}
+
+		for (int i = 0; i < command_args.size(); i++){ // Wait till all the child processes are done executing
+			int status;
+			pid_t c_pid = wait(&status);
+		}
+
+		delete[] line_c;
+
 	}
 }
 
